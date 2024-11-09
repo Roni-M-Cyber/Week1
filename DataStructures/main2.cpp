@@ -1,31 +1,39 @@
-#include "Stack.h"
+#include "Utils.h"
 #include <iostream>
 
 int main()
 {
-    Stack s;  // Create an instance of Stack
-    initStack(&s);  // Initialize the stack
+    // Test the reverse function
+    int nums[] = { 1, 2, 3, 4 };
+    unsigned int size = sizeof(nums) / sizeof(nums[0]);
 
-    // Push some elements to the stack
-    push(&s, 10);
-    push(&s, 20);
-    push(&s, 30);
+    std::cout << "Original array: ";
+    for (unsigned int i = 0; i < size; ++i)
+    {
+        std::cout << nums[i] << " ";
+    }
+    std::cout << std::endl;
 
-    // Pop elements from the stack and display them
-    std::cout << "Popped: " << pop(&s) << "\n";
-    std::cout << "Popped: " << pop(&s) << "\n";
+    reverse(nums, size); // Reverse the array
 
-    // Push more elements
-    push(&s, 40);
-    push(&s, 50);
+    std::cout << "Reversed array: ";
+    for (unsigned int i = 0; i < size; ++i)
+    {
+        std::cout << nums[i] << " ";
+    }
+    std::cout << std::endl;
 
-    // Pop remaining elements
-    std::cout << "Popped: " << pop(&s) << "\n";
-    std::cout << "Popped: " << pop(&s) << "\n";
-    std::cout << "Popped: " << pop(&s) << "\n";
+    // Test the reverse10 function
+    int* reversedArray = reverse10();
 
-    // Clean the stack
-    cleanStack(&s);
+    std::cout << "Reversed 10 integers: ";
+    for (int i = 0; i < 10; ++i)
+    {
+        std::cout << reversedArray[i] << " ";
+    }
+    std::cout << std::endl;
+
+    delete[] reversedArray; // Clean up the dynamically allocated array
 
     return 0;
 }
