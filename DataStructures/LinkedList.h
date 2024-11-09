@@ -1,24 +1,18 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-// Node structure for the linked list
-typedef struct Node
+/* Node for a linked list storing positive integers */
+typedef struct LinkedListNode
 {
-    int value;        // The value of the node
-    struct Node* next; // Pointer to the next node
-} Node;
+    unsigned int value;         // Value of the node
+    LinkedListNode* next;       // Pointer to the next node in the list
+} LinkedListNode;
 
-// Linked List structure
-typedef struct LinkedList
-{
-    Node* head; // Pointer to the first node in the list
-} LinkedList;
-
-// Function prototypes
-void initList(LinkedList* list);
-void cleanList(LinkedList* list);
-void push(LinkedList* list, int value);  // Add to the front
-int pop(LinkedList* list);               // Remove from the front
-bool isEmpty(LinkedList* list);          // Check if the list is empty
+/* Function declarations for the linked list */
+void initList(LinkedListNode** head); // Initialize an empty list
+void addFront(LinkedListNode** head, unsigned int value); // Add node at the front
+int removeFront(LinkedListNode** head); // Remove node from the front
+bool isEmpty(LinkedListNode* head); // Check if the list is empty
+void cleanList(LinkedListNode** head); // Clean up the list by deleting all nodes
 
 #endif // LINKEDLIST_H

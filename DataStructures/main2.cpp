@@ -1,32 +1,31 @@
-#include "LinkedList.h"
+#include "Stack.h"
 #include <iostream>
 
 int main()
 {
-    LinkedList list;
-    initList(&list); // Initialize the linked list
+    Stack s;  // Create an instance of Stack
+    initStack(&s);  // Initialize the stack
 
-    // Adding elements to the list
-    push(&list, 10);
-    push(&list, 20);
-    push(&list, 30);
+    // Push some elements to the stack
+    push(&s, 10);
+    push(&s, 20);
+    push(&s, 30);
 
-    // Popping elements from the list
-    std::cout << "Popped: " << pop(&list) << "\n"; // Should print 30
-    std::cout << "Popped: " << pop(&list) << "\n"; // Should print 20
+    // Pop elements from the stack and display them
+    std::cout << "Popped: " << pop(&s) << "\n";
+    std::cout << "Popped: " << pop(&s) << "\n";
 
-    // Adding more elements
-    push(&list, 40);
-    push(&list, 50);
+    // Push more elements
+    push(&s, 40);
+    push(&s, 50);
 
-    // Popping remaining elements
-    std::cout << "Popped: " << pop(&list) << "\n"; // Should print 50
-    std::cout << "Popped: " << pop(&list) << "\n"; // Should print 40
-    std::cout << "Popped: " << pop(&list) << "\n"; // Should print 10
+    // Pop remaining elements
+    std::cout << "Popped: " << pop(&s) << "\n";
+    std::cout << "Popped: " << pop(&s) << "\n";
+    std::cout << "Popped: " << pop(&s) << "\n";
 
-    // List should now be empty
-    std::cout << "List is empty: " << (isEmpty(&list) ? "Yes" : "No") << "\n";
+    // Clean the stack
+    cleanStack(&s);
 
-    cleanList(&list); // Clean up the list
     return 0;
 }

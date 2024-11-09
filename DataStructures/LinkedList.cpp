@@ -1,52 +1,48 @@
 #include "LinkedList.h"
 #include <iostream>
 
-void initList(LinkedList* list)
+// Initialize an empty list (head points to NULL)
+void initList(LinkedListNode** head)
 {
-    list->head = nullptr; // Initialize an empty list (no nodes)
+    *head = nullptr;
 }
 
-void cleanList(LinkedList* list)
+// Add a new node with value at the front of the list
+void addFront(LinkedListNode** head, unsigned int value)
 {
-    Node* current = list->head;
-    Node* nextNode = nullptr;
-
-    // Traverse and delete all nodes
-    while (current != nullptr)
-    {
-        nextNode = current->next;
-        delete current; // Deallocate the node
-        current = nextNode;
-    }
-
-    list->head = nullptr; // Set head to nullptr to mark the list as empty
-}
-
-void push(LinkedList* list, int value)
-{
-    Node* newNode = new Node; // Allocate memory for a new node
+    LinkedListNode* newNode = new LinkedListNode; // Allocate memory for the new node
     newNode->value = value;
-    newNode->next = list->head; // Link the new node to the previous head
-    list->head = newNode; // Set the new node as the head of the list
+    newNode->next = *head; // Point the new node's next to the current head
+    *head = newNode;       // Update head to point to the new node
 }
 
-int pop(LinkedList* list)
+// Remove the node at the front of the list
+int removeFront(LinkedListNode** head)
 {
-    if (isEmpty(list))
+    if (isEmpty(*head))
     {
-        std::cout << "List is empty. Cannot pop.\n";
-        return -1; // Return -1 if the list is empty
+        std::cout << "List is empty. Cannot remove from the front.\n";
+        return -1; // Return -1 if list is empty
     }
 
-    Node* temp = list->head;
-    int value = temp->value; // Get the value of the first node
-    list->head = list->head->next; // Move the head pointer to the next node
-    delete temp; // Delete the old head node
-
-    return value; // Return the popped value
+    LinkedListNode* temp = *head; // Temporary pointer to hold the current head
+    int value = temp->value;      // Store the value of the node to return
+    *head = temp->next;           // Move head to the next node
+    delete temp;                  // Delete the old head node
+    return value;                 // Return the value of the removed node
 }
 
-bool isEmpty(LinkedList* list)
+// Check if the list is empty
+bool isEmpty(LinkedListNode* head)
 {
-    return list->head == nullptr; // List is empty if head is nullptr
+    return head == nullptr; // List is empty if head is NULL
+}
+
+// Clean up the entire list by deleting all nodes
+void cleanList(LinkedListNode** head)
+{
+    while (!isEmpty(*head))
+    {
+        removeFront(head); // Remove all nodes from the front
+    }
 }
